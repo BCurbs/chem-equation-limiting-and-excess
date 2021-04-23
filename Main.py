@@ -13,7 +13,7 @@ if __name__ == "__main__":
         print("Products: " + str(my_equation.products))
         reactants_masses = {}
         for r in my_equation.reactants:
-            reactants_masses[str(r)] = float(input("What, in grams, is the mass of " + str(r) + "?" + "\n"))
+            reactants_masses[str(r)] = float(input("How much, in grams, is the input mass of " + str(r) + "?" + "\n"))
         my_equation.solve(reactants_masses)
     except EquationError:
         print("Error: Invalid equation syntax.")
