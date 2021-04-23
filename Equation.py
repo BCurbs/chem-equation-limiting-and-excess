@@ -144,7 +144,7 @@ class Compound:
         self.percent = 0
         # TODO: manipulate the formula string to fill a list of Elements.
         
-        a = re.findall('[A-Z][^A-Z]*', self.formula)
+        
         #print(str(a))
         if re.findall('[0-9]', self.formula[0]):
             #print(self.formula[0])
@@ -152,9 +152,26 @@ class Compound:
             self.formula = self.formula[1:]
         else:
             repeat = 1
+        #try:
+        if self.formula.find("(")!=-1:
+            cord1 = self.formula.index('(')
+            cord2 = self.formula.index(')')
+            parems = self.formula[int(cord1):int(cord2)+1]
+            multiplier = self.formula[self.formula.index(")")+1]
+            print(parems)
+            print(multiplier)
+            self.formula = self.formula[0:int(cord1)]+self.formula[int(cord2)+2:len(self.formula)]
+            for x in range(0,int(multiplier)):
+                self.formula+=parems[1:len(parems)-1]
+        a = re.findall('[A-Z][^A-Z]*', self.formula)
+        #except(ValueError):
+        #    a = a
+            #parems = self.formula[self.formula.index("("), self.formula.index(")")]
+            #multipier = self.formula[self.formula.index(")")+1]
+            #print(params)
+            #print(multipier)
         for b in a:
 
-            
             #print(repeat)
             for x in range(0, repeat):
                 #print(re.findall('\d+', b))
