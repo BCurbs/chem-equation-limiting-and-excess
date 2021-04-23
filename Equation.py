@@ -214,7 +214,10 @@ class Equation:
             print("The output of " + com.formula + " is " + str(smallest*com.percent)+" grams.")
         for com in self.reactants:
             excess = dictionary[str(com.formula)]-(smallest*com.percent)
-            print("The excess of " + str(com.formula) + " is " + str(excess))
+            if excess == 0:
+                print("There is no excess of " + str(com.formula))
+            else:
+                print("The excess of " + str(com.formula) + " is " + str(excess))
     def get_proportion(self):
         self.reactantsmass = 0
         self.productsmass = 0
