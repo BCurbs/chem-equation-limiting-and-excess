@@ -146,13 +146,15 @@ class Compound:
         
         a = re.findall('[A-Z][^A-Z]*', self.formula)
         #print(str(a))
-        
+        if re.findall('[0-9]', self.formula[0]):
+            #print(self.formula[0])
+            repeat = int(self.formula[0])
+            self.formula = self.formula[1:]
+        else:
+            repeat = 1
         for b in a:
 
-            if re.findall('[0-9]', self.formula[:0]):
-                repeat = a.substring[:0]
-            else:
-                repeat = 1
+            
             #print(repeat)
             for x in range(0, repeat):
                 #print(re.findall('\d+', b))
