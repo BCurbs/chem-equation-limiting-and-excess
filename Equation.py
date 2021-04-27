@@ -3,7 +3,7 @@
 # File containing resource classes
 # An Equation is made up of Compounds which is made up of Elements
 # File includes a custom exception used for flagging errors with the inputted equation
-
+debug = False
 # Periodic table of molar masses
 import re
 table = {
@@ -143,17 +143,21 @@ class Compound:
         self.elements = []
         self.percent = 0
         # TODO: manipulate the formula string to fill a list of Elements.
+        #done
         
         
-        #print(str(a))
         if re.findall('[0-9]', self.formula[0]):
-            #print(self.formula[0])
-            repeat = int(self.formula[0])
-            self.formula = self.formula[1:]
+            #splits the equation up by capitol letters
+            if re.findall('[0-9]', self.formula[1]):
+                repeat = int(self.formula[0:1])
+                self.formula = self.formula[2:]
+            else:
+                repeat = int(self.formula[0])
+                self.formula = self.formula[1:]
         else:
             repeat = 1
-        #try:
-        if self.formula.find("(")!=-1:
+        
+        if self.formula.find("(")!=-1:#this code looks for parentheses and gets the multiplier after and the elements in them and repeats it. 
             cord1 = self.formula.index('(')
             cord2 = self.formula.index(')')
             parems = self.formula[int(cord1):int(cord2)+1]
@@ -164,21 +168,19 @@ class Compound:
             for x in range(0,int(multiplier)):
                 self.formula+=parems[1:len(parems)-1]
         a = re.findall('[A-Z][^A-Z]*', self.formula)
-        #except(ValueError):
-        #    a = a
-            #parems = self.formula[self.formula.index("("), self.formula.index(")")]
-            #multipier = self.formula[self.formula.index(")")+1]
-            #print(params)
-            #print(multipier)
-        for b in a:
+        
+        for b in a:#for each element look through and add them the number of times of the number after them. 
 
-            #print(repeat)
+            if debug:
+                print(repeat)
             for x in range(0, repeat):
-                #print(re.findall('\d+', b))
+                if debug:
+                    print(re.findall('\d+', b))
                 q = (re.findall('\d+', b))
                 if not q:
                     q.append(1)
-                    #print(q)
+                    if debug:
+                        print(q)
                 for o in range(0, int(q[0])):
                     
                     self.elements.append(Element(re.sub(r'[0-9]+', '', b)))
@@ -221,22 +223,24 @@ class Equation:
     def solve(self, dictionary):
         self.dictionary = dictionary
         sidemass = 0
-        smallest = 10000000000000000000000
+        smallest = 10000000000000000000000#in programing never do this. I just picked an arbitrarily large number. 
         for compound in self.reactants:
             sidemass = dictionary[str(compound.formula)] / compound.percent
             if sidemass<smallest:
                 smallest = sidemass
                 smallestcompound = compound.formula
-        print("The limiting compound is: " + smallestcompound)
-        #print("The outputs of the equation are:")
+        print("The limiting compound is: ")
+        print("    " + smallestcompound)
+        print("The outputs of the equation are:")
         for com in self.products:
-            print("The output of " + com.formula + " is " + str(smallest*com.percent)+" grams.")
+            print("    The output of " + com.formula + " is " + str(smallest*com.percent)+" grams.")
+        print("The excess reactants are:")
         for com in self.reactants:
             excess = dictionary[str(com.formula)]-(smallest*com.percent)
             if excess == 0:
-                print("There is no excess of " + str(com.formula))
+                print("    There is no excess of " + str(com.formula) + "(So its the limiting reactant)")
             else:
-                print("The excess of " + str(com.formula) + " is " + str(excess))
+                print("    The excess of " + str(com.formula) + " is " + str(excess))
     def get_proportion(self):
         self.reactantsmass = 0
         self.productsmass = 0
@@ -244,11 +248,13 @@ class Equation:
             self.productsmass += x.get_molar_mass()
         for x in self.reactants:
             self.reactantsmass += x.get_molar_mass()
-            #print(reactantsmass)
+            if debug:
+                print(reactantsmass)
         for x in self.products:
             x.percent = x.get_molar_mass()/self.productsmass
         for x in self.reactants:
             x.percent = x.get_molar_mass()/self.reactantsmass
-            #print(str(x.get_molar_mass()) + '/' + str(self.reactantsmass) + '=' + str(x.percent))
-            #print(x.percent)
+            if debug:
+                print(str(x.get_molar_mass()) + '/' + str(self.reactantsmass) + '=' + str(x.percent))
+                print(x.percent)
     
