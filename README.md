@@ -1,6 +1,6 @@
 # chem-equation-limiting-and-excess
 
-##Please do not assume this code is working
+## Please do not assume this code is working
 
 This should be able to get the limiting and excess reactants from a properly formated chemical equation. 
 
