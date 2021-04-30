@@ -1,13 +1,22 @@
-# Ben Curby and  Brandon Roller, April 21 2021
+# Ben Curby and Brandon Roller, April 21 2021
 # Main file
-
+from Compound import Compound
 from Equation import Equation, EquationError
-
-
+from Solution import Solution, SolutionError 
 if __name__ == "__main__":
-    equation = input("\nPlease type in a balanced equation.\nExample of format: CaCl+NaCO3+H2O-->NaCl+CaCO3\n").replace(" ", "").replace("=", "-->")
-    # Everything after entering an equation goes in the try block.
-    try:
+    choice = int(input("For inputing a compound press 1. \nFor imputing an equation press 2.\nFor inputing a solution press 3. \n"))
+    if choice==1:
+        equation = input("What is the equation of the compound?\n")
+        compound = Compound(equation)
+        choice = int(input("Your options are:\n1:Get molar mass\n"))
+        if choice==1:
+            print("The molar mass is: "+str(compound.get_molar_mass()))
+        
+    elif choice==2:
+        equation = input("\nPlease type in a balanced equation.\nExample of format: CaCl+NaCO3+H2O-->NaCl+CaCO3\n").replace(" ", "").replace("=", "-->")
+        # Everything after entering an equation goes in the try block.
+        # This assumes errors are the users fault which they may not be. 
+        #try:
         my_equation = Equation(equation)
         print("Reactants: "+str(my_equation.reactants))
         print("Products: " + str(my_equation.products))
@@ -15,6 +24,8 @@ if __name__ == "__main__":
         for r in my_equation.reactants:
             reactants_masses[str(r)] = float(input("How much, in grams, is the input mass of " + str(r) + "?" + "\n"))
         my_equation.solve(reactants_masses)
-    except EquationError:
-        print("Error: Invalid equation syntax.")
-        print("I mean its still an error but its prolly just cuz we screwed up programing it")
+        #except EquationError:
+        #    print("Error: Invalid equation syntax.")
+        #    print("I mean its still an error but its prolly just cuz we screwed up programing it")
+    elif choice==3:
+        a=1
