@@ -1,5 +1,7 @@
 # chem-equation-limiting-and-excess
 
+## Please do not assume this code is working
+
 This should be able to get the limiting and excess reactants from a properly formated chemical equation. 
 
 At the top of the equation.py file there is a bool called debug set to false. Set it to true to get some extra print statements. 
