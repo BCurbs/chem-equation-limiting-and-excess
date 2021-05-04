@@ -1,4 +1,3 @@
-debug = False
 import re
 from Element import Element
 class Compound:
@@ -26,8 +25,6 @@ class Compound:
             cord2 = self.formula.index(')')
             parems = self.formula[int(cord1):int(cord2)+1]
             multiplier = self.formula[self.formula.index(")")+1]
-            print(parems)
-            print(multiplier)
             self.formula = self.formula[0:int(cord1)]+self.formula[int(cord2)+2:len(self.formula)]
             for x in range(0,int(multiplier)):
                 self.formula+=parems[1:len(parems)-1]
@@ -35,16 +32,13 @@ class Compound:
         
         for b in a:#for each element look through and add them the number of times of the number after them. 
 
-            if debug:
-                print(repeat)
+            
             for x in range(0, repeat):
-                if debug:
-                    print(re.findall('\d+', b))
+                
                 q = (re.findall('\d+', b))
                 if not q:
                     q.append(1)
-                    if debug:
-                        print(q)
+                    
                 for o in range(0, int(q[0])):
                     
                     self.elements.append(Element(re.sub(r'[0-9]+', '', b)))
