@@ -25,11 +25,17 @@ if __name__ == "__main__":
             reactants_masses[str(r)] = float(input("How much, in grams, is the input mass of " + str(r) + "?" + "\n"))
         my_equation.solve(reactants_masses)
         print("The limiting compound is: ")
-        print("    " + my_equation)
+        print("    " + my_equation.equation)
         print("The outputs of the equation are:")
         for com in my_equation.products:
             print("    The output of " + com.formula + " is " + str(my_equation.smallest*com.percent)+" grams.")
-        
+        print("The excess reactants are:")
+        for com in my_equation.reactants:
+            excess = reactants_masses[str(com.formula)]-(my_equation.smallest*com.percent)
+            if excess == 0:
+                print("    There is no excess of " + str(com.formula) + "(So its the limiting reactant)")
+            else:
+                print("    The excess of " + str(com.formula) + " is " + str(excess))
         #except EquationError:
         #    print("Error: Invalid equation syntax.")
         #    print("I mean its still an error but its prolly just cuz we screwed up programing it")
