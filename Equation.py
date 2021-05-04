@@ -171,18 +171,6 @@ class Equation:
                 self.smallest = sidemass
                 smallestcompound = compound.formula
         self.limitingReactant=smallestcompound
-        #print("The limiting compound is: ")
-        #print("    " + smallestcompound)
-        #print("The outputs of the equation are:")
-        #for com in self.products:
-        #    print("    The output of " + com.formula + " is " + str(smallest*com.percent)+" grams.")
-        print("The excess reactants are:")
-        for com in self.reactants:
-            excess = dictionary[str(com.formula)]-(smallest*com.percent)
-            if excess == 0:
-                print("    There is no excess of " + str(com.formula) + "(So its the limiting reactant)")
-            else:
-                print("    The excess of " + str(com.formula) + " is " + str(excess))
         
     def get_proportion(self):
         self.reactantsmass = 0
