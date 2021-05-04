@@ -25,8 +25,6 @@ class Compound:
             cord2 = self.formula.index(')')
             parems = self.formula[int(cord1):int(cord2)+1]
             multiplier = self.formula[self.formula.index(")")+1]
-            #print(parems)
-            #print(multiplier)
             self.formula = self.formula[0:int(cord1)]+self.formula[int(cord2)+2:len(self.formula)]
             for x in range(0,int(multiplier)):
                 self.formula+=parems[1:len(parems)-1]
