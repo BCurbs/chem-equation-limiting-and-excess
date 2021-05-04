@@ -3,7 +3,6 @@
 # File containing resource classes
 # An Equation is made up of Compounds which is made up of Elements
 # File includes a custom exception used for flagging errors with the inputted equation
-debug = False
 # Periodic table of molar masses
 import re
 from Compound import Compound
@@ -169,20 +168,10 @@ class Equation:
         for compound in self.reactants:
             sidemass = dictionary[str(compound.formula)] / compound.percent
             if sidemass<smallest:
-                smallest = sidemass
+                self.smallest = sidemass
                 smallestcompound = compound.formula
-        print("The limiting compound is: ")
-        print("    " + smallestcompound)
-        print("The outputs of the equation are:")
-        for com in self.products:
-            print("    The output of " + com.formula + " is " + str(smallest*com.percent)+" grams.")
-        print("The excess reactants are:")
-        for com in self.reactants:
-            excess = dictionary[str(com.formula)]-(smallest*com.percent)
-            if excess == 0:
-                print("    There is no excess of " + str(com.formula) + "(So its the limiting reactant)")
-            else:
-                print("    The excess of " + str(com.formula) + " is " + str(excess))
+        self.limitingReactant=smallestcompound
+        
     def get_proportion(self):
         self.reactantsmass = 0
         self.productsmass = 0
@@ -190,13 +179,9 @@ class Equation:
             self.productsmass += x.get_molar_mass()
         for x in self.reactants:
             self.reactantsmass += x.get_molar_mass()
-            if debug:
-                print(reactantsmass)
         for x in self.products:
             x.percent = x.get_molar_mass()/self.productsmass
         for x in self.reactants:
             x.percent = x.get_molar_mass()/self.reactantsmass
-            if debug:
-                print(str(x.get_molar_mass()) + '/' + str(self.reactantsmass) + '=' + str(x.percent))
-                print(x.percent)
+            
     
