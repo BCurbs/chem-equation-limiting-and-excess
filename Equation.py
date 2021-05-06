@@ -164,10 +164,10 @@ class Equation:
     def solve(self, dictionary):
         self.dictionary = dictionary
         sidemass = 0
-        smallest = 10000000000000000000000#in programing never do this. I just picked an arbitrarily large number. 
+        self.smallest = 10000000000000000000000#in programing never do this. I just picked an arbitrarily large number. 
         for compound in self.reactants:
             sidemass = dictionary[str(compound.formula)] / compound.percent
-            if sidemass<smallest:
+            if sidemass<self.smallest:
                 self.smallest = sidemass
                 smallestcompound = compound.formula
         self.limitingReactant=smallestcompound

@@ -24,8 +24,8 @@ if __name__ == "__main__":
         for r in my_equation.reactants:
             reactants_masses[str(r)] = float(input("How much, in grams, is the input mass of " + str(r) + "?" + "\n"))
         my_equation.solve(reactants_masses)
-        print("The limiting compound is: ")
-        print("    " + my_equation.equation)
+        #print("The limiting compound is: ")
+        #print("    " + my_equation.equation)
         print("The outputs of the equation are:")
         for com in my_equation.products:
             print("    The output of " + com.formula + " is " + str(my_equation.smallest*com.percent)+" grams.")
@@ -40,4 +40,11 @@ if __name__ == "__main__":
         #    print("Error: Invalid equation syntax.")
         #    print("I mean its still an error but its prolly just cuz we screwed up programing it")
     elif choice==3:
-        a=1
+        solutionstr = input("\nPlease type in a balanced equation.\nExample of format: CaCl+NaCO3+H2O-->NaCl+CaCO3\n").replace(" ", "").replace("=", "-->")
+        solution = Solution(solutionstr)
+        reactants_volume = {}
+        reactants_molarity = {}
+        for compound in solution.reactants:
+            reactants_volume[str(compound)] = float(input("How much, in ml, is the input volume of " + str(compound) + "?" + "\n"))
+            reactants_molarity[str(compound)] = float(input("How much, in ml, is the input volume of " + str(compound) + "?" + "\n"))
+        
