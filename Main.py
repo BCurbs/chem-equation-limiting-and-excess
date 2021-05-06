@@ -40,4 +40,11 @@ if __name__ == "__main__":
         #    print("Error: Invalid equation syntax.")
         #    print("I mean its still an error but its prolly just cuz we screwed up programing it")
     elif choice==3:
-        a=1
+        solutionstr = input("\nPlease type in a balanced equation.\nExample of format: CaCl+NaCO3+H2O-->NaCl+CaCO3\n").replace(" ", "").replace("=", "-->")
+        solution = Solution(solutionstr)
+        reactants_volume = {}
+        reactants_molarity = {}
+        for compound in solution.reactants:
+            reactants_volume[str(compound)] = float(input("How much, in ml, is the input volume of " + str(compound) + "?" + "\n"))
+            reactants_molarity[str(compound)] = float(input("How much, in ml, is the input volume of " + str(compound) + "?" + "\n"))
+        
